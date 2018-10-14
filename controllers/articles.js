@@ -13,7 +13,6 @@ exports.sendArticlesById = (req, res, next) => {
     res.send({ article });
   })
   .catch(err => {
-    if(err.name === 'ValidationError' || err.name === 'CastError') err.status = 400;
     next(err)
   })
 };
@@ -31,7 +30,6 @@ exports.sendCommentsById = (req, res, next) => {
       res.send({ comments });
     })
     .catch(err => {
-      if(err.name === 'ValidationError' || err.name === 'CastError') err.status = 400;
       next(err)
     })
 };
@@ -61,7 +59,6 @@ exports.postComment = (req, res, next) => {
       res.status(201).send({comment})
   })
   .catch(err => {
-    if(err.name === 'ValidationError' || err.name === 'CastError') err.status = 400
     next(err)
   })
 };
@@ -79,7 +76,7 @@ exports.updateVote = (req, res, next) => {
   )
     .populate("created_by")
     .then(article => {
-      if(article.length === 0) return Promise.reject({status: 404, message: "That article doesnt exist"})
+      if(article === null) return Promise.reject({status: 404, message: "That article doesnt exist"})
       res.status(200).send({article});
     })
 

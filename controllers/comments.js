@@ -46,8 +46,9 @@ exports.updateVote = (req, res, next) => {
   )
     .populate("belongs_to")
     .populate("created_by")
-    .then(article => {
-      res.status(200).send({article});
+    .then(comment => {
+      if(comment === null) return Promise.reject({status: 404, message: "That comment doesnt exist"})
+      res.status(200).send({comment});
     })
 
     .catch(err => {
@@ -59,6 +60,7 @@ exports.deleteComment = (req, res, next) => {
     const { comment_id } = req.params;
     Comment.remove({ _id: comment_id })
     .then(() => {
+      if(article === null) return Promise.reject({status: 404, message: "That article doesnt exist"})
         res.send('comment removed')
     })
     .catch(err => {

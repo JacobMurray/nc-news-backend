@@ -175,5 +175,39 @@ describe("/api", () => {
           expect(res.body.message).to.equal('That article doesnt exist');
         });
     });
+    it("PATCH returns 400 and error message", () => {
+      return request
+        .patch(`/api/articles/word?vote=up`)
+        .expect(400)
+        .then(res => {
+          expect(res.body.message).to.equal('Cast to ObjectId failed for value "word" at path "_id" for model "articles"');
+        });
+    });
   });
+  describe('/api/comments/:comment_id', () => {
+    it("PATCH returns 200 and the articles", () => {
+      return request
+        .patch(`/api/comments/${comment._id}?vote=up`)
+        .expect(200)
+        .then(res => {
+          expect(res.body.comment.votes).to.equal(comment.votes +1);
+        });
+    });
+    it("PATCH returns 404 and error message", () => {
+      return request
+        .patch(`/api/comments/${topic._id}?vote=up`)
+        .expect(404)
+        .then(res => {
+          expect(res.body.message).to.equal('That comment doesnt exist');
+        });
+    });
+    it("PATCH returns 400 and error message", () => {
+      return request
+        .patch(`/api/comments/word?vote=up`)
+        .expect(400)
+        .then(res => {
+          expect(res.body.message).to.equal('Cast to ObjectId failed for value "word" at path "_id" for model "comments"');
+        });
+    });
+  })
 });
