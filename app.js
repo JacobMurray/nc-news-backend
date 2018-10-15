@@ -13,7 +13,7 @@ mongoose.connect(
   }
 );
 app.use(bodyParser.json());
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.get("/", (req, res) => res.sendFile('homepage'));
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articleRouter);
