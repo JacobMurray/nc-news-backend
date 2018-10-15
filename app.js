@@ -13,7 +13,7 @@ mongoose.connect(
   }
 );
 app.use(bodyParser.json());
-app.get("/", (req, res) => res.render('homepage'));
+app.get("https://jacobserver.herokuapp.com/", (req, res) => res.render('homepage'));
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articleRouter);
 app.use("/api/comments", commentRouter);
