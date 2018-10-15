@@ -24,6 +24,5 @@ app.use("/*", (req, res, next) => next({ status: 404, message: "page not found" 
 app.use(handle404);
 app.use(handle400);
 app.use(handle500);
-//5bbe5d141759d52dc3d0ff1b
 
 module.exports = app;
