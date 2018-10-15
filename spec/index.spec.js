@@ -225,5 +225,31 @@ describe("/api", () => {
           expect(res.body.message).to.equal('That article doesnt exist');
         });
     });
+    it("DELETE returns 400 and error message", () => {
+      return request
+        .delete(`/api/comments/hello`)
+        .expect(400)
+        .then(res => {
+          expect(res.body.message).to.equal('Cast to ObjectId failed for value "hello" at path "_id" for model "comments"');
+        });
+    });
+  })
+  describe.only('/api/users/:username', () => {
+    it("GET returns 200 and the user", () => {
+      return request
+        .get(`/api/users/${user.username}`)
+        .expect(200)
+        .then(res => {
+          expect(res.body.user[0].name).to.equal(user.name);
+        });
+    });
+    it("GET returns 404 and a error message", () => {
+      return request
+        .get(`/api/users/jacobgodslayer`)
+        .expect(404)
+        .then(res => {
+          expect(res.body.message).to.equal('That user doesnt exist');
+        });
+    });
   })
 });
