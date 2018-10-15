@@ -13,8 +13,7 @@ mongoose.connect(
   }
 );
 app.use(bodyParser.json());
-app.get("/", (req, res) => res.send("all good"));
-//app.get('/api', )
+app.get("/", (req, res) => res.render('homepage'));
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articleRouter);
 app.use("/api/comments", commentRouter);
