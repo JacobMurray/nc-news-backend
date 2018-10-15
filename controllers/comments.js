@@ -59,9 +59,9 @@ exports.updateVote = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
     const { comment_id } = req.params;
     Comment.remove({ _id: comment_id })
-    .then(() => {
-      if(article === null) return Promise.reject({status: 404, message: "That article doesnt exist"})
-        res.send('comment removed')
+    .then((article) => {
+      if(article.n === 0) return Promise.reject({status: 404, message: "That article doesnt exist"})
+        res.send({message: 'comment removed'})
     })
     .catch(err => {
         next(err)

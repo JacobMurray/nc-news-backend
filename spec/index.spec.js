@@ -209,5 +209,21 @@ describe("/api", () => {
           expect(res.body.message).to.equal('Cast to ObjectId failed for value "word" at path "_id" for model "comments"');
         });
     });
+    it("DELETE returns 200", () => {
+      return request
+        .delete(`/api/comments/${comment._id}`)
+        .expect(200)
+        .then(res => {
+          expect(res.body.message).to.equal('comment removed');
+        });
+    });
+    it("DELETE returns 404 and error message", () => {
+      return request
+        .delete(`/api/comments/${topic._id}`)
+        .expect(404)
+        .then(res => {
+          expect(res.body.message).to.equal('That article doesnt exist');
+        });
+    });
   })
 });
