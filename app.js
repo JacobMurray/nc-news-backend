@@ -6,6 +6,8 @@ const DB_URL = process.env.DB_URL || require("./config").DB_URL;
 const { topicsRouter, articleRouter, commentRouter, userRouter } = require("./routes");
 const { handle404, handle400, handle500 } = require("./error_handling");
 
+//https://jacobserver.herokuapp.com/api/articles
+
 mongoose.connect(
   DB_URL,
   () => {
@@ -14,7 +16,7 @@ mongoose.connect(
 );
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.get("/", (req, res) => res.sendFile('homepage'));
+app.get("/", (req, res) => res.sendFile(__dirname + '/public/homepage.html'));
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articleRouter);
 app.use("/api/comments", commentRouter);
