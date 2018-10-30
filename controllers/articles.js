@@ -12,7 +12,7 @@ exports.sendArticlesById = (req, res, next) => {
   Article.find({ _id: article_id }).populate('created_by')
   .then(article => {
     if(article.length === 0) return Promise.reject({status: 404, message: "That article doesnt exist"})
-    res.send({ article });
+    res.send({ article : article[0] });
   })
   .catch(err => {
     next(err)
