@@ -10,7 +10,7 @@ exports.sendUserById = (req, res, next) => {
     const {user_id} = req.params
     User.find({username: user_id}).then(user => {
       if(user.length === 0) return Promise.reject({status: 404, message: "That user doesnt exist"})
-      res.send({ user });
+      res.send({ user: user[0] });
     }).catch(err => {
         next(err)
     })
