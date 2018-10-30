@@ -1,14 +1,16 @@
 const { Article, Comment, User } = require("../models");
 
 exports.sendArticles = (req, res, next) => {
-  Article.find().then(article => {
+  Article.find().populate('created_by')
+  .then(article => {
     res.send({ article });
   });
 };
 
 exports.sendArticlesById = (req, res, next) => {
   const { article_id } = req.params;
-  Article.find({ _id: article_id }).then(article => {
+  Article.find({ _id: article_id }).populate('created_by')
+  .then(article => {
     if(article.length === 0) return Promise.reject({status: 404, message: "That article doesnt exist"})
     res.send({ article });
   })

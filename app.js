@@ -5,6 +5,7 @@ const app = express();
 const DB_URL = process.env.DB_URL || require("./config").DB_URL;
 const { topicsRouter, articleRouter, commentRouter, userRouter } = require("./routes");
 const { handle404, handle400, handle500 } = require("./error_handling");
+const cors = require("cors")
 
 //https://jacobserver.herokuapp.com/api/articles
 
@@ -14,6 +15,7 @@ mongoose.connect(
     console.log(`connected to ${DB_URL}`);
   }
 );
+app.use(cors())
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.get("/", (req, res) => res.sendFile(__dirname + '/public/homepage.html'));

@@ -234,7 +234,7 @@ describe("/api", () => {
         });
     });
   })
-  describe.only('/api/users/:username', () => {
+  describe('/api/users/:username', () => {
     it("GET returns 200 and the user", () => {
       return request
         .get(`/api/users/${user.username}`)
