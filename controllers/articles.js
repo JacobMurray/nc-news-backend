@@ -58,7 +58,7 @@ exports.postComment = (req, res, next) => {
       .populate('created_by')
   })
   .then(comment => {
-      res.status(201).send({comment})
+      res.status(201).send({comment : comment[0]})
   })
   .catch(err => {
     next(err)

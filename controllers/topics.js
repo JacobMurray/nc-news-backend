@@ -34,7 +34,7 @@ exports.postArticle = (req, res, next) => {
       );
     })
     .then(article => {
-      res.status(201).send(article);
+      res.status(201).send({article : article[0]});
     })
     .catch(err =>{
       if(err.name === 'ValidationError') err.status = 400;
