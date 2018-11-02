@@ -9,7 +9,7 @@ exports.sendTopics = (req, res, next) => {
 exports.sendArticleByTopic = (req, res, next) => {
   const { topics_slug } = req.params;
   Article.find({ belongs_to: topics_slug })
-    .populate("created_by", "-__v -_id")
+    .populate("created_by", "-__v")
     .then(article => {
       if(article.length === 0) return Promise.reject({status: 404, message: "That topic doesnt exist"})
       res.send({ article });
