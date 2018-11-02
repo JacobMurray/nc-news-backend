@@ -88,3 +88,14 @@ exports.updateVote = (req, res, next) => {
 };
 
 
+exports.deleteArticle = (req, res, next) => {
+  const { article_id } = req.params;
+  Article.remove({ _id: article_id })
+  .then((article) => {
+    if(article.length === 0) return Promise.reject({status: 404, message: "That article doesnt exist"})
+      res.send({message: 'article removed'})
+  })
+  .catch(err => {
+      next(err)
+  })
+}

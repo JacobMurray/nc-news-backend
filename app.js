@@ -18,7 +18,7 @@ mongoose.connect(
 app.use(cors())
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.get("/", (req, res) => res.sendFile(__dirname + '/public/homepage.html'));
+app.get("/api", (req, res) => res.sendFile(__dirname + '/public/homepage.html'));
 app.use("/api/topics", topicsRouter);
 app.use("/api/articles", articleRouter);
 app.use("/api/comments", commentRouter);
